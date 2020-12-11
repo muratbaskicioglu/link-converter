@@ -7,4 +7,10 @@ import { AppService } from './app.service';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  static description = `
+    Hello, the API provides to convert links to another type of links.
+    See the documentation page for more information.
+    - by Murat Baskıcıoğlu
+  `;
+}

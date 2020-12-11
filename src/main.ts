@@ -24,7 +24,6 @@ export async function createApp<T>(
       'The API provides to convert links to another type of links.',
     )
     .setVersion('1.0')
-    .setBasePath('api/v1')
     .build();
   const document = SwaggerModule.createDocument(app, options);
 
