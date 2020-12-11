@@ -11,4 +11,3 @@ No feature implemented yet!
 
   - Web URL to deeplink converter
   - Deeplink to Web URL
-
