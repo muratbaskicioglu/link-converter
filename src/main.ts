@@ -4,6 +4,7 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 export async function createApp<T>(
@@ -16,6 +17,18 @@ export async function createApp<T>(
   } else {
     app = await NestFactory.create(AppModule);
   }
+
+  const options = new DocumentBuilder()
+    .setTitle('Link Converter API')
+    .setDescription(
+      'The API provides to convert links to another type of links.',
+    )
+    .setVersion('1.0')
+    .setBasePath('api/v1')
+    .build();
+  const document = SwaggerModule.createDocument(app, options);
+
+  SwaggerModule.setup('documentation', app, document);
 
   return app;
 }
