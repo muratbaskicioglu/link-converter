@@ -5,6 +5,12 @@ import { HealthResponseDto } from './health-response.dto';
 
 @Controller()
 export class AppController {
+  static Endpoint = {
+    webURLToDeeplink: (webURL?: string) => {
+      return `/web-url-to-deeplink/${webURL || ':webURL'}`;
+    },
+  };
+
   constructor(private readonly appService: AppService) {}
 
   @ApiExcludeEndpoint()
