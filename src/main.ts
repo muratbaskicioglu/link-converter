@@ -4,6 +4,7 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+import { ConfigService } from '@nestjs/config';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
@@ -34,6 +35,7 @@ export async function createApp<T>(
 
 async function bootstrap() {
   const app = await createApp<NestFastifyApplication>(new FastifyAdapter());
-  await app.listen(3000);
+  const configService = app.get<ConfigService>(ConfigService);
+  await app.listen(configService.get('PORT'));
 }
 bootstrap();
