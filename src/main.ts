@@ -36,6 +36,6 @@ export async function createApp<T>(
 async function bootstrap() {
   const app = await createApp<NestFastifyApplication>(new FastifyAdapter());
   const configService = app.get<ConfigService>(ConfigService);
-  await app.listen(configService.get('PORT'));
+  await app.listen(process.env.PORT || configService.get('PORT'), '0.0.0.0');
 }
 bootstrap();
