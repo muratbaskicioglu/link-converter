@@ -1,22 +1,29 @@
 # Link Converter
 
-[![Build Status](https://img.shields.io/badge/status-in%20progress-yellowgreen)]()
+[![Build Status](https://img.shields.io/badge/status-done-yellowgreen)](http://localhost:3000/documentation)
 
 This service provides you to convert your links to another type of link.
 
 # Features
 
-##### 1. Web URL to Deeplink Converter
+#### Web URL to Deeplink Converter
 
 `GET` `/web-url-to-deeplink?url=[Your Web URL]`
 
-Use the endpoint to convert your Web URLs to Deeplink.
+Use the endpoint to convert your Web URLs to Deeplinks.
 
-***Notice:** `GET` method has limited characters by URL length. Might be needed to support `POST` method if reach the limit in some cases.*
+#### Deeplink to Web URL Converter
+
+`GET` `/deeplink-to-web-url?url=[Your Deeplink]`
+
+Use the endpoint to convert your Deeplinks to Web URLs.
+
+***Notice**: `GET` method has limited characters by URL length. Might be needed to support `POST` method if reach the limit in some cases.*
 
 See the API documentation for more detail at: `/documentation`
 
 ### Todos
 
-  - Deeplink to Web URL
+  - Refactor on link builder module
+  - Enhancement on unit testing
 
