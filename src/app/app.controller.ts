@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { ApiOkResponse, ApiExcludeEndpoint } from '@nestjs/swagger';
 import { AppService } from './app.service';
 import { HealthResponseDto } from './health-response.dto';
@@ -7,7 +7,7 @@ import { HealthResponseDto } from './health-response.dto';
 export class AppController {
   static Endpoint = {
     webURLToDeeplink: (webURL?: string) => {
-      return `/web-url-to-deeplink/${webURL || ':webURL'}`;
+      return `/web-url-to-deeplink?url=${webURL || ':webURL'}`;
     },
   };
 
@@ -23,5 +23,10 @@ export class AppController {
   @Get('health')
   getHealth(): HealthResponseDto {
     return this.appService.getHealth();
+  }
+
+  @Get('web-url-to-deeplink')
+  webURLToDeeplink(@Query('url') webURL: string) {
+    return this.appService.convertWebURLToDeeplink(webURL);
   }
 }

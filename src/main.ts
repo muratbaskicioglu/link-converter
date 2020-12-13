@@ -6,7 +6,7 @@ import {
 } from '@nestjs/platform-fastify';
 import { ConfigService } from '@nestjs/config';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { AppModule } from './app.module';
+import { AppModule } from './app/app.module';
 
 export async function createApp<T>(
   httpAdapter?: AbstractHttpAdapter,
