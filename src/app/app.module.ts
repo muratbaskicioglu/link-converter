@@ -1,5 +1,6 @@
 import { Module, MiddlewareConsumer } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import * as Joi from '@hapi/joi';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from '../database/database.module';
@@ -13,6 +14,14 @@ import { LoggerService } from './logger.service';
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ['.env.development.local', '.env'],
+      validationSchema: Joi.object({
+        NODE_ENV: Joi.string().default('development'),
+        PORT: Joi.number().default(3000),
+        ELASTICSEARCH_NODE: Joi.string().default('http://localhost:9200'),
+        ELASTICSEARCH_USERNAME: Joi.string().default('elastic'),
+        ELASTICSEARCH_PASSWORD: Joi.string().default('admin'),
+        LOG_STORING_ENABLED: Joi.boolean().default(false),
+      }),
     }),
     DatabaseModule,
     LinkBuilderModule,
@@ -27,7 +36,11 @@ export class AppModule {
     - by Murat Baskıcıoğlu
   `;
 
+  constructor(private configService: ConfigService) {}
+
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes('web-url-to-deeplink');
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes('web-url-to-deeplink', 'deeplink-to-web-url');
   }
 }

@@ -18,9 +18,9 @@ export class LoggerService {
     statusCode: number,
   ) {
     const requestDTO = new RequestDto(method, url, userAgent, ip, statusCode);
-    const logStoringDisabled = this.configService.get('LOG_STORING_DISABLED');
+    const logStoringEnabled = this.configService.get('LOG_STORING_ENABLED');
 
-    if (!logStoringDisabled) {
+    if (logStoringEnabled) {
       this.requestSearchService.indexRequest(requestDTO);
     } else {
       console.log('Request: ', requestDTO);
