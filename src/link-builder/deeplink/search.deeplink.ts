@@ -1,5 +1,6 @@
 import { Deeplink } from './deeplink';
 import { createQueryString } from '../utilities';
+import { SearchWebURL } from '../web-url/search.web-url';
 
 export type SearchDeeplinkParams = {
   Query: string;
@@ -8,7 +9,7 @@ export type SearchDeeplinkParams = {
 export class SearchDeeplink extends Deeplink {
   static readonly PAGE = 'Search';
 
-  constructor(params: SearchDeeplinkParams) {
+  constructor(private params: SearchDeeplinkParams) {
     super(`${Deeplink.DEEPLINK_PROTOCOLS[0]}//`);
 
     const { Query } = params;
@@ -16,6 +17,12 @@ export class SearchDeeplink extends Deeplink {
     this.search = createQueryString({
       Page: SearchDeeplink.PAGE,
       Query,
+    });
+  }
+
+  toWebURL(): SearchWebURL {
+    return new SearchWebURL({
+      q: this.params.Query,
     });
   }
 }
