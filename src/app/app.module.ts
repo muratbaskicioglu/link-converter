@@ -3,11 +3,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { DatabaseModule } from '../database/database.module';
 import { LinkBuilderModule } from '../link-builder/link-builder.module';
 import { LoggerMiddleware } from './logger.middleware';
-import { RequestSearchService } from './request-search.service';
 import { LoggerService } from './logger.service';
+import { ElasticsearchModule } from '../elasticsearch/elasticsearch.module';
+import { MockElasticsearchModule } from '../mock-elasticsearch/mock-elasticsearch.module';
 
 @Module({
   imports: [
@@ -20,14 +20,15 @@ import { LoggerService } from './logger.service';
         ELASTICSEARCH_NODE: Joi.string().default('http://localhost:9200'),
         ELASTICSEARCH_USERNAME: Joi.string().default('elastic'),
         ELASTICSEARCH_PASSWORD: Joi.string().default('admin'),
-        LOG_STORING_ENABLED: Joi.boolean().default(false),
       }),
     }),
-    DatabaseModule,
     LinkBuilderModule,
+    process.env.LOG_STORING_ENABLED === 'true'
+      ? ElasticsearchModule
+      : MockElasticsearchModule,
   ],
   controllers: [AppController],
-  providers: [AppService, RequestSearchService, LoggerService],
+  providers: [AppService, LoggerService],
 })
 export class AppModule {
   static description = `
@@ -35,8 +36,6 @@ export class AppModule {
     See the documentation page for more information.
     - by Murat Baskıcıoğlu
   `;
-
-  constructor(private configService: ConfigService) {}
 
   configure(consumer: MiddlewareConsumer) {
     consumer
