@@ -4,6 +4,8 @@ import { InvalidURLException } from './exception/invalid-url.exception';
 import { LinkBuilderService } from '../link-builder/link-builder.service';
 import { ProductWebURL } from '../link-builder/web-url/product.web-url';
 import { NotWebURLProvidedException } from './exception/not-web-url-provided.exception';
+import { SearchDeeplink } from '../link-builder/deeplink/search.deeplink';
+import { NotDeeplinkProvidedException } from './exception/not-deeplink-provided.exception';
 
 describe('AppService', () => {
   let service: AppService;
@@ -17,7 +19,7 @@ describe('AppService', () => {
     expect(service).toBeDefined();
   });
 
-  describe('webURLToDeeplink', () => {
+  describe('convertWebURLToDeeplink', () => {
     it('should be defined', () => {
       expect(service.convertWebURLToDeeplink).toBeDefined();
     });
@@ -63,6 +65,48 @@ describe('AppService', () => {
       expect(() => {
         service.convertWebURLToDeeplink(deeplink);
       }).toThrow(NotWebURLProvidedException);
+    });
+  });
+
+  describe('convertDeeplinkToWebURL', () => {
+    it('should be defined', () => {
+      expect(service.convertDeeplinkToWebURL).toBeDefined();
+    });
+
+    it('should convert Deeplink to Web URL correctly', async () => {
+      const deeplink = 'ty://?Page=Search&Query=test';
+
+      when(mockedLinkBuilderService.buildFor(deeplink)).thenReturn(
+        new SearchDeeplink({ Query: 'test' }),
+      );
+
+      service.convertDeeplinkToWebURL(deeplink);
+
+      verify(mockedLinkBuilderService.buildFor(deeplink)).called();
+    });
+
+    it('should throw an error if url is invalid', async () => {
+      const invalidURL = 'invalidURL';
+
+      when(mockedLinkBuilderService.buildFor(invalidURL)).thenThrow(
+        new InvalidURLException(),
+      );
+
+      expect(() => {
+        service.convertDeeplinkToWebURL(invalidURL);
+      }).toThrow(InvalidURLException);
+    });
+
+    it('should throw an error if not a Web URL given', async () => {
+      const webURL = 'https://testdomain';
+
+      when(mockedLinkBuilderService.buildFor(webURL)).thenThrow(
+        new NotDeeplinkProvidedException(),
+      );
+
+      expect(() => {
+        service.convertWebURLToDeeplink(webURL);
+      }).toThrow(NotDeeplinkProvidedException);
     });
   });
 });

@@ -8,9 +8,15 @@ export class ProductDeeplinkParser implements Parser {
   constructor(private readonly url: URL) {}
 
   canParse(): boolean {
-    const page = this.url.searchParams.get('Page');
+    const { searchParams } = this.url;
+    const Page = this.nullishAndFalsyToUndefined<string>(
+      searchParams.get('Page'),
+    );
+    const ContentId = this.nullishAndFalsyToUndefined<string>(
+      searchParams.get('ContentId'),
+    );
 
-    return page === ProductDeeplink.PAGE;
+    return Page === ProductDeeplink.PAGE && !!ContentId;
   }
 
   parse<ProductDeeplinkParams>(): any {

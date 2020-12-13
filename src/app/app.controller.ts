@@ -7,7 +7,10 @@ import { HealthResponseDto } from './dto/health-response.dto';
 export class AppController {
   static Endpoint = {
     webURLToDeeplink: (webURL?: string) => {
-      return `/web-url-to-deeplink?url=${webURL || ':webURL'}`;
+      return `/web-url-to-deeplink${webURL ? `?url=${webURL}` : ''}`;
+    },
+    deeplinkToWebURL: (deeplink?: string) => {
+      return `/deeplink-to-web-url${deeplink ? `?url=${deeplink}` : ''}`;
     },
   };
 
@@ -25,8 +28,13 @@ export class AppController {
     return this.appService.getHealth();
   }
 
-  @Get('web-url-to-deeplink')
+  @Get(AppController.Endpoint.webURLToDeeplink())
   webURLToDeeplink(@Query('url') webURL: string) {
     return this.appService.convertWebURLToDeeplink(webURL);
+  }
+
+  @Get(AppController.Endpoint.deeplinkToWebURL())
+  deeplinkToWebURL(@Query('url') deeplink: string) {
+    return this.appService.convertDeeplinkToWebURL(deeplink);
   }
 }
