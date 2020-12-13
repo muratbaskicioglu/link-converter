@@ -5,9 +5,18 @@
 This service provides you to convert your links to another type of link.
 
 # Features
-No feature implemented yet!
+
+##### 1. Web URL to Deeplink Converter
+
+`GET` `/web-url-to-deeplink?url=[Your Web URL]`
+
+Use the endpoint to convert your Web URLs to Deeplink.
+
+***Notice:** `GET` method has limited characters by URL length. Might be needed to support `POST` method if reach the limit in some cases.*
+
+See the API documentation for more detail at: `/documentation`
 
 ### Todos
 
-  - Web URL to deeplink converter
   - Deeplink to Web URL
+

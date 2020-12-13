@@ -2,7 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { DatabaseModule } from './database/database.module';
+import { DatabaseModule } from '../database/database.module';
+import { LinkBuilderModule } from '../link-builder/link-builder.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { DatabaseModule } from './database/database.module';
       envFilePath: ['.env.development.local', '.env'],
     }),
     DatabaseModule,
+    LinkBuilderModule,
   ],
   controllers: [AppController],
   providers: [AppService],
