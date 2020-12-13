@@ -1,9 +1,12 @@
-import { Module } from '@nestjs/common';
+import { Module, MiddlewareConsumer } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from '../database/database.module';
 import { LinkBuilderModule } from '../link-builder/link-builder.module';
+import { LoggerMiddleware } from './logger.middleware';
+import { RequestSearchService } from './request-search.service';
+import { LoggerService } from './logger.service';
 
 @Module({
   imports: [
@@ -15,7 +18,7 @@ import { LinkBuilderModule } from '../link-builder/link-builder.module';
     LinkBuilderModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, RequestSearchService, LoggerService],
 })
 export class AppModule {
   static description = `
@@ -23,4 +26,8 @@ export class AppModule {
     See the documentation page for more information.
     - by Murat Baskıcıoğlu
   `;
+
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('web-url-to-deeplink');
+  }
 }

@@ -1,9 +1,9 @@
 import { instance, mock, verify, when } from 'ts-mockito';
 import { AppService } from './app.service';
-import { InvalidURLException } from './exception/InvalidURLException';
+import { InvalidURLException } from './exception/invalid-url.exception';
 import { LinkBuilderService } from '../link-builder/link-builder.service';
 import { ProductWebURL } from '../link-builder/web-url/product.web-url';
-import { NotWebURLProvidedException } from './exception/NotWebURLProvidedException';
+import { NotWebURLProvidedException } from './exception/not-web-url-provided.exception';
 
 describe('AppService', () => {
   let service: AppService;
