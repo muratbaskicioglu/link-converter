@@ -1,7 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { ApiOkResponse, ApiExcludeEndpoint } from '@nestjs/swagger';
 import { AppService } from './app.service';
-import { HealthResponseDto } from './health-response.dto';
+import { HealthResponseDto } from './dto/health-response.dto';
 
 @Controller()
 export class AppController {

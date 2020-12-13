@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { LinkBuilderService } from '../link-builder/link-builder.service';
 import { AppModule } from './app.module';
-import { HealthResponseDto } from './health-response.dto';
-import { InvalidURLException } from './exception/InvalidURLException';
+import { HealthResponseDto } from './dto/health-response.dto';
+import { InvalidURLException } from './exception/invalid-url.exception';
 import { WebURL } from '../link-builder/web-url/web-url';
-import { NotWebURLProvidedException } from './exception/NotWebURLProvidedException';
+import { NotWebURLProvidedException } from './exception/not-web-url-provided.exception';
 
 @Injectable()
 export class AppService {
