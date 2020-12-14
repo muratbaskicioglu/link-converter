@@ -1,5 +1,5 @@
 import { RequestDto } from './dto/request.dto';
 
-export interface Elasticsearch {
+export interface ElasticsearchService {
   indexRequest(request: RequestDto);
 }

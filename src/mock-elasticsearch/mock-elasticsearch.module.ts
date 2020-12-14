@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
-import { MockElasticsearchService } from './mock-elasticsearch.service';
+import { MockElasticsearchService } from './mock.elasticsearch-service';
 
 @Module({
   providers: [
     {
-      provide: 'REQUEST_ELASTIC_SEARCH_SERVICE',
+      provide: 'REQUEST_ELASTICSEARCH_SERVICE',
       useClass: MockElasticsearchService,
     },
   ],
-  exports: ['REQUEST_ELASTIC_SEARCH_SERVICE'],
+  exports: ['REQUEST_ELASTICSEARCH_SERVICE'],
 })
 export class MockElasticsearchModule {}

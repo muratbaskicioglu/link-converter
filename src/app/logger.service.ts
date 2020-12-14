@@ -1,12 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { RequestDto } from './dto/request.dto';
-import { Elasticsearch } from './elasticsearch.interface';
+import { ElasticsearchService } from './elasticsearch-service.interface';
 
 @Injectable()
 export class LoggerService {
   constructor(
-    @Inject('REQUEST_ELASTIC_SEARCH_SERVICE')
-    private readonly requestSearchService: Elasticsearch,
+    @Inject('REQUEST_ELASTICSEARCH_SERVICE')
+    private readonly requestSearchService: ElasticsearchService,
   ) {}
 
   request(

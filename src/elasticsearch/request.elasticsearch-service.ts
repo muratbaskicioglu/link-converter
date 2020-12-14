@@ -1,15 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { ElasticsearchService } from '@nestjs/elasticsearch';
+import { ElasticsearchService as NestElasticsearchService } from '@nestjs/elasticsearch';
 import { RequestDto } from '../app/dto/request.dto';
-import { Elasticsearch } from '../app/elasticsearch.interface';
+import { ElasticsearchService } from '../app/elasticsearch-service.interface';
 
 type RequestSearchBody = RequestDto;
 
 @Injectable()
-export class RequestSearchService implements Elasticsearch {
+export class RequestElasticsearchService implements ElasticsearchService {
   private readonly INDEX = 'requests';
 
-  constructor(private readonly elasticsearchService: ElasticsearchService) {}
+  constructor(
+    private readonly elasticsearchService: NestElasticsearchService,
+  ) {}
 
   async indexRequest(request: RequestDto) {
     await this.elasticsearchService.index<any, RequestSearchBody>({

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { Elasticsearch } from '../app/elasticsearch.interface';
+import { ElasticsearchService } from '../app/elasticsearch-service.interface';
 import { RequestDto } from '../app/dto/request.dto';
 
 @Injectable()
-export class MockElasticsearchService implements Elasticsearch {
+export class MockElasticsearchService implements ElasticsearchService {
   indexRequest(request: RequestDto) {}
 }
