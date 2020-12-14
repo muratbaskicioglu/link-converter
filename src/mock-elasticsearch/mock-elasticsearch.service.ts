@@ -4,7 +4,5 @@ import { RequestDto } from '../app/dto/request.dto';
 
 @Injectable()
 export class MockElasticsearchService implements Elasticsearch {
-  indexRequest(request: RequestDto) {
-    console.log('mock');
-  }
+  indexRequest(request: RequestDto) {}
 }
