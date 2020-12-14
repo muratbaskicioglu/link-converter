@@ -1,4 +1,4 @@
-import { createQueryString, QueryParams } from '../utilities';
+import { createQueryString, QueryParams } from '../create-query-string';
 import { Deeplink } from '../deeplink/deeplink';
 import { ProductDeeplinkParser } from './product.deeplink.parser';
 import { ProductDeeplink } from '../deeplink/product.deeplink';
@@ -36,20 +36,24 @@ describe('ProductDeeplinkParser', () => {
   it('should parse correctly', () => {
     url.search = createQueryString(queryParams);
 
-    expect(parser.parse()).toEqual({
-      ContentId,
-      CampaignId,
-      MerchantId,
-    });
+    expect(parser.parse()).toEqual(
+      new ProductDeeplink({
+        ContentId,
+        CampaignId,
+        MerchantId,
+      }),
+    );
   });
 
   it('should parse correctly without optional parameters', () => {
     delete queryParams.MerchantId;
     url.search = createQueryString(queryParams);
 
-    expect(parser.parse()).toEqual({
-      ContentId,
-      CampaignId,
-    });
+    expect(parser.parse()).toEqual(
+      new ProductDeeplink({
+        ContentId,
+        CampaignId,
+      }),
+    );
   });
 });

@@ -1,11 +1,9 @@
-import { createQueryString, QueryParams } from '../utilities';
-import { SearchWebURL } from '../web-url/search.web-url';
-import { SearchWebURLParser } from './search.web-url.parser';
+import { createQueryString } from '../create-query-string';
 import { SearchDeeplink } from '../deeplink/search.deeplink';
 import { SearchDeeplinkParser } from './search.deeplink.parser';
 import { Deeplink } from '../deeplink/deeplink';
 
-describe('SearchWebURLParser', () => {
+describe('SearchDeeplinkParser', () => {
   const Query = 'testQuery';
   const queryParams = {
     Page: SearchDeeplink.PAGE,
@@ -31,6 +29,6 @@ describe('SearchWebURLParser', () => {
   });
 
   it('should parse correctly', () => {
-    expect(parser.parse()).toEqual({ Query });
+    expect(parser.parse()).toEqual(new SearchDeeplink({ Query }));
   });
 });

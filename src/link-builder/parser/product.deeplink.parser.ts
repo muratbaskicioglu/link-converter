@@ -1,10 +1,7 @@
 import { Parser } from './parser.interface';
-import {
-  ProductDeeplink,
-  ProductDeeplinkParams,
-} from '../deeplink/product.deeplink';
+import { ProductDeeplink } from '../deeplink/product.deeplink';
 
-export class ProductDeeplinkParser implements Parser {
+export class ProductDeeplinkParser implements Parser<ProductDeeplink> {
   constructor(private readonly url: URL) {}
 
   canParse(): boolean {
@@ -19,7 +16,7 @@ export class ProductDeeplinkParser implements Parser {
     return Page === ProductDeeplink.PAGE && !!ContentId;
   }
 
-  parse<ProductDeeplinkParams>(): any {
+  parse(): ProductDeeplink {
     const { searchParams } = this.url;
     const ContentId = this.nullishAndFalsyToUndefined<string>(
       searchParams.get('ContentId'),
@@ -31,11 +28,11 @@ export class ProductDeeplinkParser implements Parser {
       searchParams.get('MerchantId'),
     );
 
-    return {
+    return new ProductDeeplink({
       ContentId,
       CampaignId,
       MerchantId,
-    };
+    });
   }
 
   /**

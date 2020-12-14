@@ -1,11 +1,11 @@
 import { Deeplink } from './deeplink';
-import { createQueryString } from '../utilities';
+import { createQueryString } from '../create-query-string';
 import { ProductWebURL } from '../web-url/product.web-url';
 
 export type ProductDeeplinkParams = {
   ContentId: string;
-  CampaignId: string;
-  MerchantId: string;
+  CampaignId?: string;
+  MerchantId?: string;
 };
 
 export class ProductDeeplink extends Deeplink {

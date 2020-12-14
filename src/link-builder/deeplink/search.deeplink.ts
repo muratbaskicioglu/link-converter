@@ -1,5 +1,5 @@
 import { Deeplink } from './deeplink';
-import { createQueryString } from '../utilities';
+import { createQueryString } from '../create-query-string';
 import { SearchWebURL } from '../web-url/search.web-url';
 
 export type SearchDeeplinkParams = {

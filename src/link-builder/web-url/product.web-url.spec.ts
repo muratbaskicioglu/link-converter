@@ -1,5 +1,5 @@
 import { ProductWebURL } from './product.web-url';
-import { createQueryString, QueryParams } from '../utilities';
+import { createQueryString, QueryParams } from '../create-query-string';
 import { Deeplink } from '../deeplink/deeplink';
 import { ProductDeeplink } from '../deeplink/product.deeplink';
 

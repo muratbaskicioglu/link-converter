@@ -1,5 +1,5 @@
 import { ProductWebURLParser } from './product.web-url.parser';
-import { createQueryString, QueryParams } from '../utilities';
+import { createQueryString, QueryParams } from '../create-query-string';
 import { ProductWebURL } from '../web-url/product.web-url';
 
 describe('ProductWebURLParser', () => {
@@ -37,13 +37,15 @@ describe('ProductWebURLParser', () => {
     url.pathname = `/${brand}/${productName}${ProductWebURL.PRODUCT_PATH_SEPARATOR}${productId}`;
     url.search = createQueryString(queryParams);
 
-    expect(parser.parse()).toEqual({
-      brand,
-      productName,
-      productId,
-      boutiqueId,
-      merchantId,
-    });
+    expect(parser.parse()).toEqual(
+      new ProductWebURL({
+        brand,
+        productName,
+        productId,
+        boutiqueId,
+        merchantId,
+      }),
+    );
   });
 
   it('should parse correctly without optional parameters', () => {
@@ -51,11 +53,13 @@ describe('ProductWebURLParser', () => {
     delete queryParams.merchantId;
     url.search = createQueryString(queryParams);
 
-    expect(parser.parse()).toEqual({
-      brand,
-      productName,
-      productId,
-      boutiqueId,
-    });
+    expect(parser.parse()).toEqual(
+      new ProductWebURL({
+        brand,
+        productName,
+        productId,
+        boutiqueId,
+      }),
+    );
   });
 });

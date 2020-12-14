@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { RequestSearchService } from './request-search.service';
 import { ConfigService } from '@nestjs/config';
-import { ElasticsearchModule as ElasticsearchModuleOriginal } from '@nestjs/elasticsearch';
+import { ElasticsearchModule as NestElasticsearchModule } from '@nestjs/elasticsearch';
 
 @Module({
   imports: [
-    ElasticsearchModuleOriginal.registerAsync({
+    NestElasticsearchModule.registerAsync({
       useFactory: async (configService: ConfigService) => ({
         node: configService.get('ELASTICSEARCH_NODE'),
         auth: {

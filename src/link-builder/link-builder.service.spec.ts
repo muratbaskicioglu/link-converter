@@ -3,7 +3,7 @@ import { WebURL } from './web-url/web-url';
 import { HomeWebURL } from './web-url/home.web-url';
 import { ProductWebURL } from './web-url/product.web-url';
 import { Test, TestingModule } from '@nestjs/testing';
-import { createQueryString } from './utilities';
+import { createQueryString } from './create-query-string';
 import { Deeplink } from './deeplink/deeplink';
 import { ProductDeeplink } from './deeplink/product.deeplink';
 import { HomeDeeplink } from './deeplink/home.deeplink';

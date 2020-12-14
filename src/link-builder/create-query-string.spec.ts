@@ -1,4 +1,4 @@
-import { createQueryString, QueryParams } from './utilities';
+import { createQueryString, QueryParams } from './create-query-string';
 
 describe('utilities', () => {
   describe('createQueryString', () => {

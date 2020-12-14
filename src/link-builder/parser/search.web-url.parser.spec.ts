@@ -1,4 +1,4 @@
-import { createQueryString, QueryParams } from '../utilities';
+import { createQueryString, QueryParams } from '../create-query-string';
 import { SearchWebURL } from '../web-url/search.web-url';
 import { SearchWebURLParser } from './search.web-url.parser';
 
@@ -30,6 +30,6 @@ describe('SearchWebURLParser', () => {
     url.pathname = `/${SearchWebURL.SEARCH_PATH}`;
     url.search = createQueryString(queryParams);
 
-    expect(parser.parse()).toEqual({ q });
+    expect(parser.parse()).toEqual(new SearchWebURL({ q }));
   });
 });

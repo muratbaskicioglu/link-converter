@@ -1,7 +1,7 @@
 import { HomeWebURL } from './home.web-url';
 import { HomeDeeplink } from '../deeplink/home.deeplink';
 import { Deeplink } from '../deeplink/deeplink';
-import { createQueryString } from '../utilities';
+import { createQueryString } from '../create-query-string';
 
 describe('HomeWebURL', () => {
   const origin = 'https://trendyol.com';

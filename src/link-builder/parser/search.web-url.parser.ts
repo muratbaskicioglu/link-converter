@@ -1,18 +1,18 @@
 import { Parser } from './parser.interface';
-import { SearchWebURL, SearchWebURLParams } from '../web-url/search.web-url';
+import { SearchWebURL } from '../web-url/search.web-url';
 
-export class SearchWebURLParser implements Parser {
+export class SearchWebURLParser implements Parser<SearchWebURL> {
   constructor(private readonly url: URL) {}
 
   canParse(): boolean {
     return this.url.pathname === `/${SearchWebURL.SEARCH_PATH}`;
   }
 
-  parse<SearchWebURLParams>(): any {
+  parse(): SearchWebURL {
     const { searchParams } = this.url;
     const q = this.nullishAndFalsyToUndefined<string>(searchParams.get('q'));
 
-    return { q };
+    return new SearchWebURL({ q });
   }
 
   /**

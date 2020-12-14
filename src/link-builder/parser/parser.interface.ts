@@ -1,4 +1,4 @@
-export interface Parser {
+export interface Parser<T> {
   canParse(url: URL): boolean;
-  parse<T>(url: URL): T;
+  parse(url: URL): T;
 }

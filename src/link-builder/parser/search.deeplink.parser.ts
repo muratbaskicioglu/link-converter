@@ -1,7 +1,7 @@
 import { Parser } from './parser.interface';
-import { SearchDeeplink, SearchDeeplinkParams } from '../deeplink/search.deeplink';
+import { SearchDeeplink } from '../deeplink/search.deeplink';
 
-export class SearchDeeplinkParser implements Parser {
+export class SearchDeeplinkParser implements Parser<SearchDeeplink> {
   constructor(private readonly url: URL) {}
 
   canParse(): boolean {
@@ -16,13 +16,13 @@ export class SearchDeeplinkParser implements Parser {
     return Page === SearchDeeplink.PAGE && !!Query;
   }
 
-  parse<SearchDeeplinkParams>(): any {
+  parse(): SearchDeeplink {
     const { searchParams } = this.url;
     const Query = this.nullishAndFalsyToUndefined<string>(
       searchParams.get('Query'),
     );
 
-    return { Query };
+    return new SearchDeeplink({ Query });
   }
 
   /**

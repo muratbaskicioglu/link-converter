@@ -1,4 +1,4 @@
-import { createQueryString, QueryParams } from '../utilities';
+import { createQueryString, QueryParams } from '../create-query-string';
 import { Deeplink } from '../deeplink/deeplink';
 import { SearchDeeplink } from '../deeplink/search.deeplink';
 import { SearchWebURL } from './search.web-url';

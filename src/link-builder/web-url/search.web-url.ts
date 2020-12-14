@@ -1,10 +1,10 @@
 import { WebURL } from './web-url';
 import { Deeplink } from '../deeplink/deeplink';
-import { createQueryString } from '../utilities';
+import { createQueryString } from '../create-query-string';
 import { SearchDeeplink } from '../deeplink/search.deeplink';
 
 export type SearchWebURLParams = {
-  q: string,
+  q: string;
 };
 
 export class SearchWebURL extends WebURL {

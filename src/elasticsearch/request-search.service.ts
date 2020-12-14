@@ -12,6 +12,7 @@ export class RequestSearchService implements Elasticsearch {
   constructor(private readonly elasticsearchService: ElasticsearchService) {}
 
   async indexRequest(request: RequestDto) {
+    console.log('inde');
     await this.elasticsearchService.index<any, RequestSearchBody>({
       index: this.INDEX,
       body: request,

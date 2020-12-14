@@ -1,7 +1,7 @@
 import { Parser } from './parser.interface';
-import { ProductWebURL, ProductWebURLParams } from '../web-url/product.web-url';
+import { ProductWebURL } from '../web-url/product.web-url';
 
-export class ProductWebURLParser implements Parser {
+export class ProductWebURLParser implements Parser<ProductWebURL> {
   constructor(private readonly url: URL) {}
 
   canParse(): boolean {
@@ -12,7 +12,7 @@ export class ProductWebURLParser implements Parser {
     );
   }
 
-  parse<ProductWebURLParams>(): any {
+  parse(): ProductWebURL {
     const { pathname, searchParams } = this.url;
     const [, brand, product]: string[] = pathname.split('/');
     const [productName, productId]: string[] = product.split(
@@ -25,13 +25,13 @@ export class ProductWebURLParser implements Parser {
       searchParams.get('merchantId'),
     );
 
-    return {
+    return new ProductWebURL({
       brand,
       productName,
       productId,
       boutiqueId,
       merchantId,
-    };
+    });
   }
 
   /**
